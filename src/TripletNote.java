@@ -14,10 +14,10 @@ public class TripletNote {
 	//TODO choisir attribut - Voir avec le Parser Sax
 	public void setTouche(){
 	}
-	//TODO choisir attribut - Voir avec le Parser Sax
+	//TODO choisir attribut retourné - Voir avec le Parser Sax (paramètre)
 	public void setDebut(){
 	}
-	//TODO choisir attribut - Voir avec le Parser Sax
+	//TODO choisir attribut retourné - Voir avec le Parser Sax (paramètre)
 	public void setduree(){
 	}
 	//TODO choisir ce que renvoie la méthode.
