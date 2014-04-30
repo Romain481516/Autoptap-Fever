@@ -1,0 +1,51 @@
+<?xml version = "1.0" encoding="ISO8859-1" standalone="yes" ?>
+
+<MUSIQUE>
+
+	<CHEMIN>cheminmusique</CHEMIN>
+        <NOM>nomcheminmusique</NOM>
+
+        <LISTE_SCORE>
+		<Score>
+            		<joueur>Paul</joueur> 
+            		<niveau>Facile</niveau>
+            		<nbscore>1000</nbscore>
+		</Score>
+ 		<Score>
+            		<joueur>Luc</joueur> 
+            		<niveau>Facile</niveau>
+            		<nbscore>1000</nbscore>
+		</Score>
+	</LISTE_SCORE>
+
+        <PARTITION niveau="Facile">
+        	<Note>
+			<Touche>false true false</Touche>
+			<debut>15</debut>
+			<duree>10</duree>
+		</Note>
+		<Note>
+			<Touche>false true false</Touche>
+			<debut>25</debut>
+			<duree>10</duree>
+		</Note>
+	</PARTITION>
+
+	<PARTITION niveau="Moyen">
+        	<Note>
+			<Touche>false true false</Touche>
+			<debut>15</debut>
+			<duree>10</duree>
+		</Note>
+	</PARTITION>
+
+	<PARTITION niveau="Difficile">
+		<Note>
+			<Touche>false true false</Touche>
+        		<debut>15</debut>
+			<duree>10</duree>
+		</Note>
+	</PARTITION>
+</MUSIQUE>
+
+<!--Pour les notes : Gauche,Centre,Droite,Duree,Temps(ms)-->

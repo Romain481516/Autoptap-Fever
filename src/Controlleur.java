@@ -1,4 +1,3 @@
-
 public class Controlleur {
 	Bibliotheque biblio;
 
