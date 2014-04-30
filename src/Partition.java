@@ -6,8 +6,7 @@ import javax.xml.parsers.SAXParserFactory;
 public class Partition {
 	
 	//Attribut de la classe
-	//TODO Supprimer le fichier exemple
-	//String cheminPartitionXML = "XMLSchema2ex.xml";
+	String cheminPartitionXML;
 	String cheminFichierAudio;
 	String nom;
 	//TODO voir pour le tableau ? Liste Chainée ? TableauNote
@@ -15,21 +14,21 @@ public class Partition {
 	//TODO voir pour le tableau ? Liste Chainée ? TableauScore
 	Score[] tableauScore;
 	
-	//Constructeur
+	/**Constructeur
+	 * @param cheminPartXML
+	 */
 	public Partition(String cheminPartXML){
 		//Appelle du parser SAX sur le fichier XML Spécifié
 		try{
 			SAXParserFactory factory = SAXParserFactory.newInstance(); 
 			SAXParser saxParser = factory.newSAXParser();
 			InputStream xmlStream = Partition.class.getResourceAsStream(cheminPartXML);
+			cheminPartitionXML = cheminPartXML;
 			//Affectation des attributs nom et cheminFichierAudio
 			saxParser.parse(xmlStream, new SaxHandler(true,false,false,this));
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
-		
-		
-		
+		}		
 	}
 	//Permet d'accéder à toutes les notes de la partition
 	//TODO Définir le type retourner + Implémentation
@@ -46,14 +45,14 @@ public class Partition {
 	public void addScore(){
 
 	}
-	/** Méthode permettant de définir le nom de la musique.
-	 * @param String - Le chemin du fichier audio
+	/**Méthode permettant de définir le nom de la musique.
+	 * @param chemin
 	 */
 	public void setCheminAudio(String chemin){
 		cheminFichierAudio = chemin;
 	}
 	/** Méthode permettant de définir le nom de la musique.
-	 * @param String - Le nom du fichier audio
+	 * @param name
 	 */
 	public void setNomMusique(String name){
 		nom = name;
