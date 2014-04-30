@@ -16,18 +16,18 @@ public class Partition {
 	Score[] tableauScore;
 	
 	//Constructeur
-	//TODO Implémenter le constructeur
 	public Partition(String cheminPartXML){
 		//Appelle du parser SAX sur le fichier XML Spécifié
 		try{
 			SAXParserFactory factory = SAXParserFactory.newInstance(); 
 			SAXParser saxParser = factory.newSAXParser();
 			InputStream xmlStream = Partition.class.getResourceAsStream(cheminPartXML);
-			saxParser.parse(xmlStream, new SaxHandler());
+			//Affectation des attributs nom et cheminFichierAudio
+			saxParser.parse(xmlStream, new SaxHandler(true,false,false,this));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		//Affectation des attributs nom et cheminFichierAudio
+		
 		
 		
 	}
@@ -45,5 +45,27 @@ public class Partition {
 	//TODO Définir le type retourner + Implémentation
 	public void addScore(){
 
+	}
+	/** Méthode permettant de définir le nom de la musique.
+	 * @param String - Le chemin du fichier audio
+	 */
+	public void setCheminAudio(String chemin){
+		cheminFichierAudio = chemin;
+	}
+	/** Méthode permettant de définir le nom de la musique.
+	 * @param String - Le nom du fichier audio
+	 */
+	public void setNomMusique(String name){
+		nom = name;
+	}
+	/** Méthode permettant d'accéder le nom de la musique.
+	 */
+	public void getCheminAudio(){
+		System.out.println(cheminFichierAudio);
+	}
+	/** Méthode permettant d'accéder au nom de la musique.
+	 */
+	public void getNomMusique(){
+		System.out.println(nom);
 	}
 }
