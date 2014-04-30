@@ -1,4 +1,3 @@
-
 public class Partition {
 	
 	//Attribut de la classe
