@@ -22,6 +22,7 @@ public class Bibliotheque {
 		
 	}
 	//TODO Choisir le type retournée
+	//TODO Implémenter la méthode
 	public void allScore(){
 		
 	}
