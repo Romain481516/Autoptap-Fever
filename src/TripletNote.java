@@ -7,6 +7,7 @@ public class TripletNote {
 	
 	//Constructeur
 	public TripletNote(boolean[] triplet,int deb,int dur){
+		super();
 		tripletNote = triplet;
 		duree = dur;
 		debut = deb;
@@ -34,12 +35,12 @@ public class TripletNote {
 	}
 	//Pour les tests
 	public String toString(){
-		String toReturn = "Note"+"/n";
-		for(int i = 1; i==3; i++){
-			toReturn = toReturn + tripletNote[i] + "/n";	
+		String toReturn = "Note:"+"\n" + "Touches: ";
+		for(int i = 0; i<3; i++){
+			toReturn = toReturn + tripletNote[i]+ " ";	
 		}
-		toReturn = toReturn + "Debut: " + debut +"/n";
-		toReturn = toReturn + "Duree: " + duree +"/n";
+		toReturn = toReturn + "\nDebut: " + debut +"\n";
+		toReturn = toReturn + "Duree: " + duree +"\n";
 		return toReturn;
 		
 	}

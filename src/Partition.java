@@ -1,18 +1,19 @@
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
 public class Partition {
-	
+
 	//Attribut de la classe
 	String cheminPartitionXML;
 	String cheminFichierAudio;
 	String nom;
 	List<TripletNote> ListeTripletNote;	
 	List<Score> ListeScore;
-	
+
 	/**Constructeur
 	 * @param cheminPartXML
 	 */
@@ -31,6 +32,7 @@ public class Partition {
 	}
 	//Permet d'accéder à toutes les notes de la partition
 	public void accessNote(String niveau){
+		ListeTripletNote = new ArrayList<TripletNote>();
 		try{
 			SAXParserFactory factory = SAXParserFactory.newInstance(); 
 			SAXParser saxParser = factory.newSAXParser();
@@ -44,7 +46,7 @@ public class Partition {
 	//Permet d'accéder à tous les scores de la partition
 	//TODO Définir le type retourner + Implémentation
 	public void accessScore(){
-
+		ListeScore = new ArrayList<Score>();
 	}
 	//Permet d'ajouter un score
 	//TODO Définir le type retourner + Implémentation - Voir JDOM

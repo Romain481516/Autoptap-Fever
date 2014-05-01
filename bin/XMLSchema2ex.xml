@@ -20,14 +20,24 @@
 
 	<PARTITION niveau="Facile">
 		<Note>
-			<touche>false true false</touche>
+			<touche>true false false</touche>
 			<debut>15</debut>
 			<duree>10</duree>
 		</Note>
 		<Note>
-			<touche>false true false</touche>
+			<touche>false true true</touche>
 			<debut>25</debut>
-			<duree>10</duree>
+			<duree>20</duree>
+		</Note>
+		<Note>
+			<touche>true true true</touche>
+			<debut>55</debut>
+			<duree>60</duree>
+		</Note>
+		<Note>
+			<touche>true false true</touche>
+			<debut>58</debut>
+			<duree>75</duree>
 		</Note>
 	</PARTITION>
 

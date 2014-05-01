@@ -72,7 +72,6 @@ public class SaxHandler extends DefaultHandler {
 			 */
 			if (attributes.getValue(0).equals(niveau)){
 				bNiveau = true;
-				System.out.println(bNiveau);
 			}
 		}
 		/*bNiveau est important ici. Sinon on va demander la création de
@@ -102,8 +101,7 @@ public class SaxHandler extends DefaultHandler {
 			bNiveau = false;
 		}
 
-		if(qName.equals("Note")&& bNote){ //TODO Vérifier l'utilité (bNote) !
-			bNote = false;
+		if(qName.equals("Note")&& bNiveau){
 			//Ajout de la note à la partition.
 			part.ListeTripletNote.add(new TripletNote(tripletNote,debut,duree));
 			System.out.println("Une note a été ajoutée !");
@@ -133,12 +131,11 @@ public class SaxHandler extends DefaultHandler {
 		}
 		else if (bLectureNote){
 			if (bNiveau){
-				System.out.println("Accès aux notes contenus dans la partition.");
 				if(bNote){
 					String aDecouper = new String(chars,start,length);
 					String[] Decoupe= aDecouper.split(" ");
-					for(int i = 1; i==3; i++){
-						tripletNote[i]=Boolean.parseBoolean(Decoupe[i]);	
+					for( int i = 0; i< Decoupe.length; i++){	
+						tripletNote[i]= Boolean.parseBoolean(Decoupe[i]);
 					}
 				}
 				if(bDebut){
