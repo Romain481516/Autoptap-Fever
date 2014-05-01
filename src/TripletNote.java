@@ -6,20 +6,23 @@ public class TripletNote {
 	int debut;
 	
 	//Constructeur
-	//TODO écrire le constructeur
-	public TripletNote(){
-		
+	public TripletNote(boolean[] triplet,int deb,int dur){
+		tripletNote = triplet;
+		duree = dur;
+		debut = deb;
 	}
-	//Methode qui attribut une valeur (true ou false) au touche.
-	//TODO choisir attribut - Voir avec le Parser Sax
+	/*Les setters ne servent plus car on construit directement l'objet
+	 * avec ces attributs (voir Constructeur)
+	 *
+	/*
+	 * //Methode qui attribut une valeur (true ou false) au touche.
 	public void setTouche(){
 	}
-	//TODO choisir attribut retourné - Voir avec le Parser Sax (paramètre)
 	public void setDebut(){
 	}
-	//TODO choisir attribut retourné - Voir avec le Parser Sax (paramètre)
-	public void setduree(){
+	public void setDuree(){
 	}
+	*/
 	//TODO choisir ce que renvoie la méthode.
 	public void getTouche(){
 	}
@@ -28,5 +31,16 @@ public class TripletNote {
 	}
 	//TODO choisir ce que renvoie la méthode.
 	public void getDebut(){
+	}
+	//Pour les tests
+	public String toString(){
+		String toReturn = "Note"+"/n";
+		for(int i = 1; i==3; i++){
+			toReturn = toReturn + tripletNote[i] + "/n";	
+		}
+		toReturn = toReturn + "Debut: " + debut +"/n";
+		toReturn = toReturn + "Duree: " + duree +"/n";
+		return toReturn;
+		
 	}
 }

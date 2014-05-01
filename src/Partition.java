@@ -1,4 +1,5 @@
 import java.io.InputStream;
+import java.util.List;
 
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
@@ -9,21 +10,19 @@ public class Partition {
 	String cheminPartitionXML;
 	String cheminFichierAudio;
 	String nom;
-	//TODO voir pour le tableau ? Liste Chainée ? TableauNote
-	TripletNote[] tableauNote;
-	//TODO voir pour le tableau ? Liste Chainée ? TableauScore
-	Score[] tableauScore;
+	List<TripletNote> ListeTripletNote;	
+	List<Score> ListeScore;
 	
 	/**Constructeur
 	 * @param cheminPartXML
 	 */
 	public Partition(String cheminPartXML){
+		cheminPartitionXML = cheminPartXML;
 		//Appelle du parser SAX sur le fichier XML Spécifié
 		try{
 			SAXParserFactory factory = SAXParserFactory.newInstance(); 
 			SAXParser saxParser = factory.newSAXParser();
 			InputStream xmlStream = Partition.class.getResourceAsStream(cheminPartXML);
-			cheminPartitionXML = cheminPartXML;
 			//Affectation des attributs nom et cheminFichierAudio
 			saxParser.parse(xmlStream, new SaxHandler(true,false,false,this));
 		} catch (Exception e) {
@@ -31,9 +30,16 @@ public class Partition {
 		}		
 	}
 	//Permet d'accéder à toutes les notes de la partition
-	//TODO Définir le type retourner + Implémentation
-	public void accessNote(){
-
+	public void accessNote(String niveau){
+		try{
+			SAXParserFactory factory = SAXParserFactory.newInstance(); 
+			SAXParser saxParser = factory.newSAXParser();
+			InputStream xmlStream = Partition.class.getResourceAsStream(cheminPartitionXML);
+			//Affectation des attributs nom et cheminFichierAudio
+			saxParser.parse(xmlStream, new SaxHandler(false,true,false,this,niveau));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	//Permet d'accéder à tous les scores de la partition
 	//TODO Définir le type retourner + Implémentation
@@ -41,7 +47,7 @@ public class Partition {
 
 	}
 	//Permet d'ajouter un score
-	//TODO Définir le type retourner + Implémentation
+	//TODO Définir le type retourner + Implémentation - Voir JDOM
 	public void addScore(){
 
 	}

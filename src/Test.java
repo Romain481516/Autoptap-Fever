@@ -1,4 +1,3 @@
-
 public class Test {
 
 	/**
@@ -12,6 +11,11 @@ public class Test {
 		//Vérification avec les get
 		part.getCheminAudio();
 		part.getNomMusique();
+		part.accessNote("Facile");
+		/*for (TripletNote note : part.ListeTripletNote){
+			note.toString();
+		}*/
+		
 	}
 
 }

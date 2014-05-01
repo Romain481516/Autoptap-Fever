@@ -3,37 +3,37 @@
 <MUSIQUE>
 
 	<CHEMIN>cheminmusique</CHEMIN>
-        <NOM>nomcheminmusique</NOM>
+	<NOM>nomcheminmusique</NOM>
 
-        <LISTE_SCORE>
+	<LISTE_SCORE>
 		<Score>
-            		<joueur>Paul</joueur> 
-            		<niveau>Facile</niveau>
-            		<nbscore>1000</nbscore>
+			<joueur>Paul</joueur>
+			<niveau>Facile</niveau>
+			<nbscore>1000</nbscore>
 		</Score>
- 		<Score>
-            		<joueur>Luc</joueur> 
-            		<niveau>Facile</niveau>
-            		<nbscore>1000</nbscore>
+		<Score>
+			<joueur>Luc</joueur>
+			<niveau>Facile</niveau>
+			<nbscore>1000</nbscore>
 		</Score>
 	</LISTE_SCORE>
 
-        <PARTITION niveau="Facile">
-        	<Note>
-			<Touche>false true false</Touche>
+	<PARTITION niveau="Facile">
+		<Note>
+			<touche>false true false</touche>
 			<debut>15</debut>
 			<duree>10</duree>
 		</Note>
 		<Note>
-			<Touche>false true false</Touche>
+			<touche>false true false</touche>
 			<debut>25</debut>
 			<duree>10</duree>
 		</Note>
 	</PARTITION>
 
 	<PARTITION niveau="Moyen">
-        	<Note>
-			<Touche>false true false</Touche>
+		<Note>
+			<touche>false true false</touche>
 			<debut>15</debut>
 			<duree>10</duree>
 		</Note>
@@ -41,11 +41,11 @@
 
 	<PARTITION niveau="Difficile">
 		<Note>
-			<Touche>false true false</Touche>
-        		<debut>15</debut>
+			<touche>false true false</touche>
+			<debut>15</debut>
 			<duree>10</duree>
 		</Note>
 	</PARTITION>
 </MUSIQUE>
 
-<!--Pour les notes : Gauche,Centre,Droite,Duree,Temps(ms)-->
+<!--Pour les notes : Gauche,Centre,Droite,Duree,Temps(ms) -->
