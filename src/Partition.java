@@ -37,7 +37,8 @@ public class Partition {
 	public void accessNote(String niveau){
 		if(!this.niveau.equals(niveau)){
 			this.niveau = niveau;
-			/*TODO Question de l'instanciation. Quand ? 
+			/*TODO Question de l'instanciation. (idem avec accessScore) 
+			 * Quand ? 
 			 *Va-t-il y avoir une surcharge de la mémoire ?
 			 *A chaque changement de niveau, création d'une nouvelle ArrayList
 			 *Ramasse-miettes ?
@@ -49,7 +50,6 @@ public class Partition {
 				SAXParserFactory factory = SAXParserFactory.newInstance(); 
 				SAXParser saxParser = factory.newSAXParser();
 				InputStream xmlStream = Partition.class.getResourceAsStream(cheminPartitionXML);
-				//Affectation des attributs nom et cheminFichierAudio
 				saxParser.parse(xmlStream, new SaxHandler(false,true,false,this,niveau));
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -60,6 +60,14 @@ public class Partition {
 	//TODO Définir le type retourner + Implémentation
 	public void accessScore(){
 		ListeScore = new ArrayList<Score>();
+		try{
+			SAXParserFactory factory = SAXParserFactory.newInstance(); 
+			SAXParser saxParser = factory.newSAXParser();
+			InputStream xmlStream = Partition.class.getResourceAsStream(cheminPartitionXML);
+			saxParser.parse(xmlStream, new SaxHandler(false,false,true,this));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	//Permet d'ajouter un score
 	//TODO Définir le type retourner + Implémentation - Voir JDOM
@@ -67,17 +75,20 @@ public class Partition {
 
 	}
 	/**Méthode permettant de définir le nom de la musique.
+	 * Utiliser par SaxHandler
 	 * @param chemin
 	 */
 	public void setCheminAudio(String chemin){
 		cheminFichierAudio = chemin;
 	}
 	/** Méthode permettant de définir le nom de la musique.
+	 * Utiliser par SaxHandler
 	 * @param name
 	 */
 	public void setNomMusique(String name){
 		nom = name;
 	}
+	//TODO Voir utiliter autre que pour les tests
 	/** Méthode permettant d'accéder le nom de la musique.
 	 */
 	public void getCheminAudio(){

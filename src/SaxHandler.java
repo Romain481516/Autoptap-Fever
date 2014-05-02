@@ -3,10 +3,12 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 public class SaxHandler extends DefaultHandler {
-	//Attribut définissant l'action a effectuer sur le fichier XML
-	//Le premier booléen correspond à la création d'une partition
-	//Le deuxième a la demande de lecture des notes
-	//Le troisième a la consultation des scores
+	/* Attribut définissant l'action a effectuer sur le fichier XML
+	 * (Creation, Lecture des notes, consultation des scores)
+	 * Le premier booléen correspond à la création d'une partition
+	 * Le deuxième a la demande de lecture des notes 
+	 * Le troisième a la consultation des scores
+	*/
 	boolean bCreation = false;
 	boolean bLectureNote = false;
 	boolean bConsultationScore = false;
@@ -15,16 +17,24 @@ public class SaxHandler extends DefaultHandler {
 	boolean bChemin = false;
 	boolean bNom = false;
 	boolean bNote = false;
-	boolean bNiveau = false;
+	boolean bNiveau = false; //Permet de changer uniquement le niveau demandé
 	boolean bTouche = false;
 	boolean bDuree = false;
 	boolean bDebut = false;
+	boolean bScore = false;
+	boolean bJoueur = false;
+	boolean bNivScore = false;
+	boolean bNbScore = false;
 	//Attribut
 	Partition part;
 	//Attribut lié à la création d'une note
 	boolean[] tableauTouche = new boolean[3];
 	int debut;
 	int duree;
+	//Attribut lié à la création d'un score
+	String joueur;
+	String niveauScore;
+	int nbScore;
 
 	/**
 	 * Constructeur du gestionnaire Sax
@@ -80,7 +90,7 @@ public class SaxHandler extends DefaultHandler {
 		if(qName.equals("Note")&& bNiveau){
 			bNote = true;
 		}
-		if(qName.equals("touche")&& bNiveau){ //bNiveau optionnel
+		if(qName.equals("touche")&& bNiveau){ //bNiveau optionnel ?!
 			bTouche = true;
 		}
 		if(qName.equals("debut")&& bNiveau){
@@ -88,6 +98,15 @@ public class SaxHandler extends DefaultHandler {
 		}
 		if(qName.equals("duree")&& bNiveau){
 			bDuree = true;
+		}
+		if(qName.equals("joueur")){
+			bJoueur = true;
+		}
+		if(qName.equals("niveau")){
+			bNivScore = true;
+		}
+		if(qName.equals("nbscore")){
+			bNbScore = true;
 		}
 	}
 	public void endElement(String uri, String localName, String qName) throws SAXException {
@@ -114,6 +133,20 @@ public class SaxHandler extends DefaultHandler {
 		}
 		if(qName.equals("duree")){
 			bDuree = false;
+		}
+		if(qName.equals("Score") && bConsultationScore){
+			//Ajout de la note à la partition.
+			part.ListeScore.add(new Score(joueur,niveauScore,nbScore));
+			System.out.println("Score a été ajoutée !"); //- Test
+		}
+		if(qName.equals("joueur")){
+			bJoueur = false;
+		}
+		if(qName.equals("niveau")){
+			bNivScore = false;
+		}
+		if(qName.equals("nbscore")){
+			bNbScore = false;
 		}
 
 	}
@@ -151,7 +184,18 @@ public class SaxHandler extends DefaultHandler {
 			}
 		}
 		else if (bConsultationScore){
-			System.out.println("Accès à la liste de score");
+			if(bJoueur){
+				joueur = new String(chars,start,length);
+				System.out.println(joueur); //Test
+			}
+			if(bNivScore){
+				niveauScore = new String(chars,start,length);
+				System.out.println(niveauScore); //Test
+			}
+			if(bNbScore){
+				nbScore = Integer.parseInt(new String(chars,start,length));
+				System.out.println(nbScore); //Test
+			}
 		}
 		else System.out.println("Erreur pas de code opération.");
 	}

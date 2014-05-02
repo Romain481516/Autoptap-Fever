@@ -11,8 +11,8 @@ public class Test {
 		part.getCheminAudio();
 		part.getNomMusique();
 		/*Validation de la création des notes.
-		 * Le résultat obtenu est l'ensemble des notes contenus dans le fichier XML correspondant
-		 * au niveau.
+		 * Le résultat attendu est l'ensemble des notes contenus dans le 
+		 * fichier XML correspondant au niveau.
 		 * Voir Méthode toString de TripletNote
 		 */
 		part.accessNote("Facile");
@@ -21,6 +21,16 @@ public class Test {
 		}
 		//Test de deux chargements succéssifs
 		part.accessNote("Facile");
+		
+		/*Validation du chargement des notes
+		 * Le résultat attendu est l'ensemble des notes contenus dans 
+		 * le fichier XML correspondant.
+		 * Voir méthode toString de Score.
+		 */
+		part.accessScore();
+		for (int i = 0; i < part.ListeScore.size(); i++){
+			System.out.println(part.ListeScore.get(i).toString());
+		}
 	}
 
 }

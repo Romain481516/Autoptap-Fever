@@ -8,8 +8,8 @@
 	<LISTE_SCORE>
 		<Score>
 			<joueur>Paul</joueur>
-			<niveau>Facile</niveau>
-			<nbscore>1000</nbscore>
+			<niveau>Difficile</niveau>
+			<nbscore>13532</nbscore>
 		</Score>
 		<Score>
 			<joueur>Luc</joueur>
