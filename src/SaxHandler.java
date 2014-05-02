@@ -22,7 +22,7 @@ public class SaxHandler extends DefaultHandler {
 	//Attribut
 	Partition part;
 	//Attribut lié à la création d'une note
-	boolean[] tripletNote = new boolean[3];
+	boolean[] tableauTouche = new boolean[3];
 	int debut;
 	int duree;
 
@@ -103,8 +103,8 @@ public class SaxHandler extends DefaultHandler {
 
 		if(qName.equals("Note")&& bNiveau){
 			//Ajout de la note à la partition.
-			part.ListeTripletNote.add(new TripletNote(tripletNote,debut,duree));
-			System.out.println("Une note a été ajoutée !");
+			part.ListeTripletNote.add(new TripletNote(tableauTouche,debut,duree));
+			//System.out.println("Une note a été ajoutée !"); - Test
 		}
 		if(qName.equals("touche")){
 			bTouche = false;
@@ -131,11 +131,15 @@ public class SaxHandler extends DefaultHandler {
 		}
 		else if (bLectureNote){
 			if (bNiveau){
-				if(bNote){
+				if(bTouche){
+		
 					String aDecouper = new String(chars,start,length);
 					String[] Decoupe= aDecouper.split(" ");
+
 					for( int i = 0; i< Decoupe.length; i++){	
-						tripletNote[i]= Boolean.parseBoolean(Decoupe[i]);
+						//System.out.println(Decoupe[i]); - Test
+						tableauTouche[i]= Boolean.parseBoolean(Decoupe[i]);
+						//System.out.println(tableauTouche[i]); -Test
 					}
 				}
 				if(bDebut){

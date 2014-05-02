@@ -8,20 +8,22 @@ public class TripletNote {
 	//Constructeur
 	public TripletNote(boolean[] triplet,int deb,int dur){
 		super();
-		tripletNote = triplet;
+		for(int i=0; i<3; i++){
+		tripletNote[i] = triplet[i];
+		}
 		duree = dur;
 		debut = deb;
 	}
 	/*Les setters ne servent plus car on construit directement l'objet
 	 * avec ces attributs (voir Constructeur)
-	 *
-	/*
-	 * //Methode qui attribut une valeur (true ou false) au touche.
+	 //Methode qui attribut une valeur (true ou false) au touche.
 	public void setTouche(){
 	}
-	public void setDebut(){
+	public void setDebut(int deb){
+	debut =deb;
 	}
-	public void setDuree(){
+	public void setDuree(int dur){
+	duree = dur;
 	}
 	*/
 	//TODO choisir ce que renvoie la méthode.
