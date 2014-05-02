@@ -13,6 +13,7 @@ public class Partition {
 	String nom;
 	List<TripletNote> ListeTripletNote;	
 	List<Score> ListeScore;
+	String niveau ="";
 
 	/**Constructeur
 	 * @param cheminPartXML
@@ -30,18 +31,30 @@ public class Partition {
 			e.printStackTrace();
 		}		
 	}
-	//Permet d'accéder à toutes les notes de la partition
+	/**Permet de charger dans l'objet toutes les notes de la partition.
+	 * @param niveau
+	 */
 	public void accessNote(String niveau){
-		ListeTripletNote = new ArrayList<TripletNote>();
-		try{
-			SAXParserFactory factory = SAXParserFactory.newInstance(); 
-			SAXParser saxParser = factory.newSAXParser();
-			InputStream xmlStream = Partition.class.getResourceAsStream(cheminPartitionXML);
-			//Affectation des attributs nom et cheminFichierAudio
-			saxParser.parse(xmlStream, new SaxHandler(false,true,false,this,niveau));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		if(!this.niveau.equals(niveau)){
+			this.niveau = niveau;
+			/*TODO Question de l'instanciation. Quand ? 
+			 *Va-t-il y avoir une surcharge de la mémoire ?
+			 *A chaque changement de niveau, création d'une nouvelle ArrayList
+			 *Ramasse-miettes ?
+			 *Comment éviter cela ? 
+			 */
+			
+			ListeTripletNote = new ArrayList<TripletNote>();
+			try{
+				SAXParserFactory factory = SAXParserFactory.newInstance(); 
+				SAXParser saxParser = factory.newSAXParser();
+				InputStream xmlStream = Partition.class.getResourceAsStream(cheminPartitionXML);
+				//Affectation des attributs nom et cheminFichierAudio
+				saxParser.parse(xmlStream, new SaxHandler(false,true,false,this,niveau));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}//else System.out.println("Le niveau est déjà en mémoire"); - Test
 	}
 	//Permet d'accéder à tous les scores de la partition
 	//TODO Définir le type retourner + Implémentation

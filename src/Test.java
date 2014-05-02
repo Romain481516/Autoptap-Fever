@@ -19,6 +19,8 @@ public class Test {
 		for (int i = 0; i < part.ListeTripletNote.size(); i++){
 			System.out.println(part.ListeTripletNote.get(i).toString());
 		}
+		//Test de deux chargements succéssifs
+		part.accessNote("Facile");
 	}
 
 }
