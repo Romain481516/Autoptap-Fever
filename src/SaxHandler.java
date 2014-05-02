@@ -123,7 +123,7 @@ public class SaxHandler extends DefaultHandler {
 		if(qName.equals("Note")&& bNiveau){
 			//Ajout de la note à la partition.
 			part.ListeTripletNote.add(new TripletNote(tableauTouche,debut,duree));
-			//System.out.println("Une note a été ajoutée !"); - Test
+			//System.out.println("Une note a été ajoutée !"); // Test
 		}
 		if(qName.equals("touche")){
 			bTouche = false;
@@ -137,7 +137,7 @@ public class SaxHandler extends DefaultHandler {
 		if(qName.equals("Score") && bConsultationScore){
 			//Ajout de la note à la partition.
 			part.ListeScore.add(new Score(joueur,niveauScore,nbScore));
-			System.out.println("Score a été ajoutée !"); //- Test
+			//System.out.println("Score a été ajoutée !"); // Test
 		}
 		if(qName.equals("joueur")){
 			bJoueur = false;
@@ -170,9 +170,9 @@ public class SaxHandler extends DefaultHandler {
 					String[] Decoupe= aDecouper.split(" ");
 
 					for( int i = 0; i< Decoupe.length; i++){	
-						//System.out.println(Decoupe[i]); - Test
+						//System.out.println(Decoupe[i]); // Test
 						tableauTouche[i]= Boolean.parseBoolean(Decoupe[i]);
-						//System.out.println(tableauTouche[i]); -Test
+						//System.out.println(tableauTouche[i]); //Test
 					}
 				}
 				if(bDebut){
@@ -186,15 +186,15 @@ public class SaxHandler extends DefaultHandler {
 		else if (bConsultationScore){
 			if(bJoueur){
 				joueur = new String(chars,start,length);
-				System.out.println(joueur); //Test
+				//System.out.println(joueur); //Test
 			}
 			if(bNivScore){
 				niveauScore = new String(chars,start,length);
-				System.out.println(niveauScore); //Test
+				//System.out.println(niveauScore); //Test
 			}
 			if(bNbScore){
 				nbScore = Integer.parseInt(new String(chars,start,length));
-				System.out.println(nbScore); //Test
+				//System.out.println(nbScore); //Test
 			}
 		}
 		else System.out.println("Erreur pas de code opération.");
