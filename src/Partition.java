@@ -1,10 +1,24 @@
 import java.io.InputStream;
+import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
-
+import java.io.File;
+import java.io.IOException;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.Text;
+import org.xml.sax.SAXException;
 public class Partition {
 
 	//Attribut de la classe
@@ -12,7 +26,7 @@ public class Partition {
 	String cheminFichierAudio;
 	String nom;
 	List<TripletNote> ListeTripletNote;	
-	List<Score> ListeScore;
+	List<Score> ListeScore= new ArrayList<Score>();
 	String niveau ="";
 
 	/**Constructeur
@@ -44,7 +58,7 @@ public class Partition {
 			 *Ramasse-miettes ?
 			 *Comment éviter cela ? 
 			 */
-			
+
 			ListeTripletNote = new ArrayList<TripletNote>();
 			try{
 				SAXParserFactory factory = SAXParserFactory.newInstance(); 
@@ -59,7 +73,6 @@ public class Partition {
 	//Permet d'accéder à tous les scores de la partition
 	//TODO Définir le type retourner + Implémentation
 	public void accessScore(){
-		ListeScore = new ArrayList<Score>();
 		try{
 			SAXParserFactory factory = SAXParserFactory.newInstance(); 
 			SAXParser saxParser = factory.newSAXParser();
@@ -71,18 +84,79 @@ public class Partition {
 	}
 	//Permet d'ajouter un score
 	//TODO Définir le type retourner + Implémentation - Voir JDOM
-	public void addScore(){
+	//TODO Méthode à surcharger ? avec les attributs du score ? i.e paramètre : joueur,niveau,nbScore
+	public void addScore(Score nouveauScore)throws IOException {
+		DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+		DocumentBuilder docBuilder;
+		try {
+			docBuilder = docFactory.newDocumentBuilder();
+			org.w3c.dom.Document doc ;
+			File xml = new File(cheminPartitionXML);
+			//InputStream xmlStream = Partition.class.getResourceAsStream(cheminPartitionXML);
+			doc = docBuilder.parse(xml);
 
+			//Placement au nivau de LISTE_SCORE
+			Node listeScore = doc.getElementsByTagName("LISTE_SCORE").item(0);
+			//Ajout du noeud Score
+			Element score = doc.createElement("Score");
+			listeScore.appendChild(score);
+
+			//Ajout de l'élément Joueur
+			Element joueur = doc.createElement("joueur");
+			Text joueurTxt = doc.createTextNode(nouveauScore.getJoueur());
+			joueur.appendChild(joueurTxt);
+			score.appendChild(joueur);
+			//Ajout de l'élément Niveau
+			Element niveau = doc.createElement("niveau");
+			Text niveauTxt = doc.createTextNode(nouveauScore.getNiveau());
+			niveau.appendChild(niveauTxt);
+			score.appendChild(niveau);
+			//Ajout de l'élément nbScore
+			Element nbScore = doc.createElement("nbscore");
+			Text nbScoreTxt = doc.createTextNode(nouveauScore.getNbScore());
+			nbScore.appendChild(nbScoreTxt);
+			score.appendChild(nbScore);
+
+			DOMSource domSource = new DOMSource(doc);
+			// Transformation 
+			
+			StringWriter writer = new StringWriter();
+			StreamResult result = new StreamResult(writer);
+			
+			TransformerFactory fabrique = TransformerFactory.newInstance();
+			Transformer transformer = fabrique.newTransformer();
+			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+			transformer.setOutputProperty(OutputKeys.ENCODING, "ISO-8859-1");
+			transformer.transform(domSource, result);
+			String xmlString = result.getWriter().toString();
+			System.out.println(xmlString);
+			
+			//Ajout à la liste des scores
+			this.ListeScore.add(nouveauScore);
+
+			System.out.println("Done"); //TEST
+			
+
+		} catch (ParserConfigurationException pce) {
+			pce.printStackTrace();
+		} catch (TransformerException tfe) {
+			tfe.printStackTrace();
+		} catch (IOException ioe) {
+			ioe.printStackTrace();
+		} catch (SAXException sae) {
+			sae.printStackTrace();
+		}
 	}
+
 	/**Méthode permettant de définir le nom de la musique.
-	 * Utiliser par SaxHandler
+	 * Utiliser par la classe SaxHandler
 	 * @param chemin
 	 */
 	public void setCheminAudio(String chemin){
 		cheminFichierAudio = chemin;
 	}
 	/** Méthode permettant de définir le nom de la musique.
-	 * Utiliser par SaxHandler
+	 * Utiliser par la classe SaxHandler
 	 * @param name
 	 */
 	public void setNomMusique(String name){
@@ -99,4 +173,5 @@ public class Partition {
 	public void getNomMusique(){
 		System.out.println(nom);
 	}
+
 }

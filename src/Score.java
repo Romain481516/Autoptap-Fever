@@ -25,17 +25,29 @@ public class Score {
 
 	}*/
 	
-	//TODO Choisir le type d'attribut à retourner + Implémenter
-	public void getJoueur(){
-
+	/**
+	 * Méthode permettant d'accéder au nom du joueur stocké
+	 * dans l'objet Score
+	 * @return
+	 */
+	public String getJoueur(){
+		return joueur.toString();
 	}
-	//TODO Choisir le type d'attribut à retourner + Implémenter
-	public void getNiveau(){
-
+	/**
+	 * Méthode permettant d'accéder au niveau stocké
+	 * dans l'objet Score
+	 * @return
+	 */
+	public String getNiveau(){
+		return niveau.toString();
 	}
-	//TODO Choisir le type d'attribut à retourner + Implémenter
-	public void getNbScore(){
-
+	/**
+	 * Méthode permettant d'accéder au score (numérique) stocké
+	 * dans l'objet Score
+	 * @return
+	 */
+	public String getNbScore(){
+		return Integer.toString(nbScore);
 	}
 	//Test
 	public String toString(){
