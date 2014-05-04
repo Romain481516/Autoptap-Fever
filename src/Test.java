@@ -9,7 +9,7 @@ public class Test {
 		/*Test de l'affectation des attributs nom et chemin à la partition.
 		 * Le résultat attendu est nomcheminmusique suivi de nomcheminmusique.
 		 */
-		Partition part = new Partition("TestChemin.xml");
+		Partition part = new Partition("XMLSchema2ex.xml");
 		part.getCheminAudio();
 		part.getNomMusique();
 		/*Validation de la création des notes.
@@ -38,16 +38,19 @@ public class Test {
 		 * reprenant l'ancien fichier mais contenant le score supplémentaire.
 		 * Puis voir l'ensemble des scores contenus dans le nouveau fichier XML.
 		 */
-		try {
-			part.addScore( new Score("Guillaume","Difficile",156060));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
+			try {
+				part.addScore( new Score("Jean","Facile",0));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
 		part.accessScore();
 		for (int i = 0; i < part.ListeScore.size(); i++){
 			System.out.println(part.ListeScore.get(i).toString());
 		}
+		System.out.println(part.ListeScore.size());
 	}
 
 }

@@ -1,4 +1,4 @@
-<?xml version = "1.0" encoding="ISO-8859-1" standalone="yes" ?>
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
 <MUSIQUE>
 
 	<CHEMIN>cheminmusique</CHEMIN>
@@ -15,7 +15,7 @@
 			<niveau>Facile</niveau>
 			<nbscore>1000</nbscore>
 		</Score>
-	</LISTE_SCORE>
+</LISTE_SCORE>
 
 	<PARTITION niveau="Facile">
 		<Note>
@@ -55,6 +55,4 @@
 			<duree>10</duree>
 		</Note>
 	</PARTITION>
-</MUSIQUE>
-
-<!--Pour les notes : Gauche,Centre,Droite,Duree,Temps(ms) -->
+</MUSIQUE><!--Pour les notes : Gauche,Centre,Droite,Duree,Temps(ms) -->

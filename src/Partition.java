@@ -1,5 +1,4 @@
 import java.io.InputStream;
-import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.parsers.SAXParser;
@@ -15,8 +14,14 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpressionException;
+import javax.xml.xpath.XPathFactory;
+
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import org.w3c.dom.Text;
 import org.xml.sax.SAXException;
 public class Partition {
@@ -28,6 +33,7 @@ public class Partition {
 	List<TripletNote> ListeTripletNote;	
 	List<Score> ListeScore= new ArrayList<Score>();
 	String niveau ="";
+	boolean bScoreLoaded = false;
 
 	/**Constructeur
 	 * @param cheminPartXML
@@ -73,13 +79,16 @@ public class Partition {
 	//Permet d'accéder à tous les scores de la partition
 	//TODO Définir le type retourner + Implémentation
 	public void accessScore(){
-		try{
-			SAXParserFactory factory = SAXParserFactory.newInstance(); 
-			SAXParser saxParser = factory.newSAXParser();
-			InputStream xmlStream = Partition.class.getResourceAsStream(cheminPartitionXML);
-			saxParser.parse(xmlStream, new SaxHandler(false,false,true,this));
-		} catch (Exception e) {
-			e.printStackTrace();
+		if (!bScoreLoaded){ //Evite de recharger les scores
+			try{
+				SAXParserFactory factory = SAXParserFactory.newInstance(); 
+				SAXParser saxParser = factory.newSAXParser();
+				InputStream xmlStream = Partition.class.getResourceAsStream(cheminPartitionXML);
+				saxParser.parse(xmlStream, new SaxHandler(false,false,true,this));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			bScoreLoaded = true;
 		}
 	}
 	//Permet d'ajouter un score
@@ -92,7 +101,6 @@ public class Partition {
 			docBuilder = docFactory.newDocumentBuilder();
 			org.w3c.dom.Document doc ;
 			File xml = new File(cheminPartitionXML);
-			//InputStream xmlStream = Partition.class.getResourceAsStream(cheminPartitionXML);
 			doc = docBuilder.parse(xml);
 
 			//Placement au nivau de LISTE_SCORE
@@ -117,25 +125,39 @@ public class Partition {
 			nbScore.appendChild(nbScoreTxt);
 			score.appendChild(nbScore);
 
+			//XPath’s normalize-space
+			XPath xPath = XPathFactory.newInstance().newXPath();
+			NodeList nodeList;
+
+			nodeList = (NodeList) xPath.evaluate("//text()[normalize-space()='']",doc,XPathConstants.NODESET);
+			for (int i = 0; i < nodeList.getLength(); ++i) {
+				Node node = nodeList.item(i);
+				node.getParentNode().removeChild(node);
+			}
+
+
+			//Définition de la source et de la destination
 			DOMSource domSource = new DOMSource(doc);
-			// Transformation 
-			
-			StringWriter writer = new StringWriter();
-			StreamResult result = new StreamResult(writer);
-			
+			StreamResult result = new StreamResult(xml);
+			//Création du transformeur
 			TransformerFactory fabrique = TransformerFactory.newInstance();
 			Transformer transformer = fabrique.newTransformer();
+			//Propriété du transformeur
+			transformer.setOutputProperty(OutputKeys.METHOD, "xml");
 			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+			transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
 			transformer.setOutputProperty(OutputKeys.ENCODING, "ISO-8859-1");
+			//Transformation
 			transformer.transform(domSource, result);
-			String xmlString = result.getWriter().toString();
-			System.out.println(xmlString);
-			
+
 			//Ajout à la liste des scores
 			this.ListeScore.add(nouveauScore);
 
 			System.out.println("Done"); //TEST
-			
+		} catch (XPathExpressionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+
 
 		} catch (ParserConfigurationException pce) {
 			pce.printStackTrace();
