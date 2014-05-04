@@ -40,7 +40,7 @@ public class Test {
 		 */
 
 			try {
-				part.addScore( new Score("Jean","Facile",0));
+				part.addScore( new Score("Mickey","Facile",0));
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

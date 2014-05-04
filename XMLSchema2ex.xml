@@ -8,31 +8,6 @@
             <niveau>Difficile</niveau>
             <nbscore>13532</nbscore>
         </Score>
-        <Score>
-            <joueur>Luc</joueur>
-            <niveau>Facile</niveau>
-            <nbscore>1000</nbscore>
-        </Score>
-        <Score>
-            <joueur>Guillaume</joueur>
-            <niveau>Difficile</niveau>
-            <nbscore>156060</nbscore>
-        </Score>
-        <Score>
-            <joueur>Jean</joueur>
-            <niveau>Facile</niveau>
-            <nbscore>0</nbscore>
-        </Score>
-        <Score>
-            <joueur>Jean</joueur>
-            <niveau>Facile</niveau>
-            <nbscore>0</nbscore>
-        </Score>
-        <Score>
-            <joueur>Jean</joueur>
-            <niveau>Facile</niveau>
-            <nbscore>0</nbscore>
-        </Score>
     </LISTE_SCORE>
     <PARTITION niveau="Facile">
         <Note>

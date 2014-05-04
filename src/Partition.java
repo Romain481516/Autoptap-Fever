@@ -42,6 +42,7 @@ public class Partition {
 		cheminPartitionXML = cheminPartXML;
 		//Appelle du parser SAX sur le fichier XML Spécifié
 		try{
+			
 			SAXParserFactory factory = SAXParserFactory.newInstance(); 
 			SAXParser saxParser = factory.newSAXParser();
 			InputStream xmlStream = Partition.class.getResourceAsStream(cheminPartXML);
@@ -125,7 +126,7 @@ public class Partition {
 			nbScore.appendChild(nbScoreTxt);
 			score.appendChild(nbScore);
 
-			//XPath’s normalize-space
+			//XPath’s normalize-space - Indentation
 			XPath xPath = XPathFactory.newInstance().newXPath();
 			NodeList nodeList;
 
